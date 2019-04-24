@@ -1,0 +1,2 @@
+1.Zipkin为dubbo自定义SPI扩展接口；
+2.com.wayeal.cloud.zipkin.Zipkin为项目中此接口所在的包路径（全路径）

@@ -1,0 +1,13 @@
+<!--<bean id="tracerConfig" class="com.wayeal.cloud.base.zipkin.TracerConfig" init-method="init"/>-->
+<bean id="zipkinCollectorConfigurationFactory" class="com.wayeal.cloud.zipkin.ZipkinCollectorFactory">
+	<constructor-arg index="0" value="${zipkin.tracing.serverName}"/>
+	<constructor-arg index="1" value="${zipkin.tracing.topic}"/>
+	<constructor-arg index="2" value="${zipkin.tracing.zipkinUrl}"/>
+	<constructor-arg index="3" value="${zipkin.tracing.closeTimeout}"/>
+	<constructor-arg index="4" value="${zipkin.tracing.senderType}"/>
+	<constructor-arg index="5" value="${zipkin.tracing.connectTimeout}"/>
+	<constructor-arg index="6" value="${zipkin.tracing.rabbitMQUserName}"/>
+	<constructor-arg index="7" value="${zipkin.tracing.rabbitMQPassword}"/>
+</bean>
+<bean id="springContextUtils" class="com.wayeal.cloud.zipkin.SpringContextUtils"/>
+<dubbo:provider filter="tracerFilter"/>

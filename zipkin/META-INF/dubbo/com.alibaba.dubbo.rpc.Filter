@@ -1,0 +1,1 @@
+tracerFilter=com.wayeal.cloud.zipkin.ZipkinTracerFilter

@@ -1,0 +1,19 @@
+CREATE OR REPLACE EDITIONABLE FUNCTION "EAMS_SISU_20210318"."DES3" (p_str IN VARCHAR2, p_key IN VARCHAR2) RETURN RAW IS
+v_data   VARCHAR2(2000);
+v_key    raw(100);
+v_retval RAW(255);
+BEGIN
+v_data := RPAD(p_str, CEIL(LENGTH(p_str)/8)*8, CHR(0));
+if (length(p_key) < 24) then
+v_key := utl_raw.cast_to_raw(RPAD(p_key, 24, chr(0)));
+else
+v_key := utl_raw.cast_to_raw(substr(p_key, 1, 24));
+end if;
+dbms_obfuscation_toolkit.DES3Encrypt (
+input => utl_raw.cast_to_raw(v_data),
+key   => v_key,
+which => 1,
+encrypted_data => v_retval
+);
+RETURN v_retval;
+END DES3;

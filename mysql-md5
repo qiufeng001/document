@@ -1,0 +1,13 @@
+CREATE OR REPLACE EDITIONABLE FUNCTION "EAMS_SISU_20210318"."MD5" (input_string VARCHAR2) RETURN varchar2
+IS
+raw_input RAW(128);
+decrypted_raw RAW(2048);
+error_in_input_buffer_length EXCEPTION;
+BEGIN
+IF input_string IS NULL OR LENGTH(TRIM(input_string)) = 0then
+RETURN NULL;
+END IF;
+raw_input := UTL_RAW.CAST_TO_RAW(input_string);
+sys.dbms_obfuscation_toolkit.MD5(INPUT => raw_input, checksum => decrypted_raw);
+RETURN LOWER(rawtohex(decrypted_raw));
+END MD5;
